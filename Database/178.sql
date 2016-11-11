@@ -1,13 +1,9 @@
-CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
-BEGIN
-  DECLARE M INT; 
-  SET M = N - 1;
-  RETURN (
-      # Write your MySQL query statement below
-     select  
-        Salary 
-     from Employee 
-     group by Salary 
-     order by Salary desc limit 1 offset M
-  );
-END
+ SELECT Scores.Score, COUNT(Ranking.Score) as Rank
+     FROM Scores
+     ,(
+     SELECT DISTINCT Score
+     FROM Scores
+     )Ranking
+     WHERE Scores.Score <= Ranking.Score
+     GROUP BY Scores.Id
+     ORDER BY Scores.Score DESC;
